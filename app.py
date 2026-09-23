@@ -1,13 +1,12 @@
 import random
 import streamlit as st
-
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
         return 1, 100
     if difficulty == "Hard":
-        return 1, 50
+        return 1, 200
     return 1, 100
 
 
@@ -28,7 +27,7 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
+#FIX: the hint where it said "GO HIGHER!" made no sense when the number was smaller than the guess same the other way around where it said "GO LOWER!".
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
@@ -46,12 +45,13 @@ def check_guess(guess, secret):
             return "Too High", "📈 Go HIGHER!"
         return "Too Low", "📉 Go LOWER!"
 
-
+#FIX: the score seems to be off. 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
             points = 10
+            
         return current_score + points
 
     if outcome == "Too High":
