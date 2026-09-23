@@ -27,23 +27,22 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-#FIX: the hint where it said "GO HIGHER!" made no sense when the number was smaller than the guess same the other way around where it said "GO LOWER!".
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
 
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
         if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 #FIX: the score seems to be off. 
 def update_score(current_score: int, outcome: str, attempt_number: int):
